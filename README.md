@@ -1,158 +1,192 @@
+# 🎓 SmartLMS – Learning Management System
 
-# Job Intelligence Platform 🚀
+**SmartLMS** is a web-based Learning Management System (LMS) developed using Java and Spring Boot. It provides a centralized platform where administrators, teachers, and students can manage and access learning activities efficiently.
 
-An AI-assisted job recommendation platform that analyzes resumes, extracts skills, identifies professional experience, and recommends relevant job opportunities based on candidate profiles.
+The platform is designed to simplify online education through course management, student enrollment, lesson delivery, assignments, examinations, and performance tracking.
 
-## 📌 Project Overview
+## 🚀 Key Features
 
-The Job Intelligence Platform simplifies the job search process by analyzing a user's resume and matching their skills and experience with available job opportunities.
+### 👨‍💼 Admin Panel
+- Manage students and teachers.
+- Create and manage courses.
+- Manage student course enrollments.
+- Monitor platform activities.
+- View reports and statistics.
 
-It combines a Java Spring Boot backend with Python-based resume processing and MongoDB Atlas for data storage.
+### 👨‍🏫 Teacher Panel
+- Manage assigned courses.
+- Create and manage lessons.
+- Upload assignments.
+- View student submissions.
+- Evaluate assignments and provide feedback.
 
-## ✨ Key Features
+### 👨‍🎓 Student Panel
+- Browse and enroll in courses.
+- Access enrolled course lessons.
+- Track learning progress.
+- View and submit assignments.
+- Participate in examinations.
+- View exam history and certificates.
 
-- **Resume Upload & Analysis:** Upload and analyze resumes.
-- **Skill Extraction:** Automatically identify technical and professional skills.
-- **Experience Detection:** Detect work experience from explicit experience details and employment date ranges.
-- **Dynamic Job Fetching:** Retrieve job opportunities using external job APIs.
-- **Job Matching:** Calculate a skill-based match percentage for job opportunities.
-- **Personalized Recommendations:** Suggest relevant jobs based on resume information.
-- **User Authentication:** Registration and login with CAPTCHA, email OTP verification, and BCrypt password hashing.
-- **Application Tracking:** Track jobs users have applied for through their dashboard.
+### 📜 Additional Features
+- Role-based access control.
+- Secure authentication and authorization.
+- Password encryption.
+- Assignment submission management.
+- Certificate generation and public verification.
+- Responsive user interface.
 
-## 🛠️ Technologies Used
+## 🛠️ Technology Stack
 
 | Technology | Purpose |
 |---|---|
 | Java | Core programming language |
-| Spring Boot | Backend development and REST APIs |
-| Python | Resume parsing and skill extraction |
-| HTML, CSS, JavaScript | Frontend development |
-| MongoDB Atlas | Cloud database |
-| Docker | Application containerization |
-| Render | Application deployment |
-| Git & GitHub | Version control and source code management |
-| JSearch API | External job data integration |
+| Spring Boot | Backend framework |
+| Spring MVC | Request handling |
+| Spring Data JPA | Database operations |
+| Hibernate | ORM framework |
+| Spring Security | Authentication and authorization |
+| MySQL | Relational database |
+| Thymeleaf | Server-side template engine |
+| HTML5 | Web page structure |
+| CSS3 | Styling |
+| Bootstrap 5 | Responsive UI |
+| JavaScript | Frontend interactions |
+| Maven | Dependency and build management |
 
-## 🏗️ System Architecture
+## 🏗️ Project Architecture
 
-The application follows a modular architecture:
+The project follows a layered architecture to maintain clean code and separation of responsibilities.
 
-1. **Frontend:** Provides the user interface for resume uploads, authentication, job recommendations, and application tracking.
-2. **Spring Boot Backend:** Handles REST APIs, authentication, business logic, and job data integration.
-3. **Python Processing Module:** Extracts resume information, skills, and professional experience.
-4. **MongoDB Atlas:** Stores user information, resume-related data, and application records.
-5. **External Job API:** Fetches available job opportunities.
-6. **Docker & Render:** Support application containerization and deployment.
+```text
+com.smartlms
+│
+├── config
+├── controller
+├── service
+├── repository
+├── entity
+├── dto
+├── security
+├── exception
+│
+└── SmartLmsApplication.java
+```
 
-## ⚙️ Getting Started
+**Layer Responsibilities:**
+
+- **Controller:** Handles incoming HTTP requests.
+- **Service:** Implements business logic.
+- **Repository:** Performs database operations.
+- **Entity:** Represents database tables.
+- **DTO:** Transfers data between application layers.
+- **Security:** Handles authentication and authorization.
+- **Config:** Manages application configurations.
+- **Exception:** Handles application errors.
+
+## ⚙️ Installation and Setup
 
 ### Prerequisites
 
-Install the following before running the project:
+Make sure you have installed:
 
-- Java JDK
-- Maven
-- Python 3
-- MongoDB Atlas account
-- Git
+- JDK 23 or a compatible JDK version
+- MySQL 8.0+
+- Maven (or use the included Maven Wrapper)
+- Eclipse IDE or Visual Studio Code
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/iniraj01/smartLMS.git
-```
-
-### 2. Navigate to the Project
+### Step 1: Clone the Repository
 
 ```bash
-cd smartLMS
+git clone https://github.com/iniraj01/smartlms.git
 ```
 
-### 3. Configure Environment Variables
-
-Configure the required credentials and application settings in your environment:
-
-- Database password (`DB_PASSWORD`)
-- MongoDB connection string
-- Job API key
-- Email service credentials
-- CAPTCHA configuration
-- OTP-related configuration
-
-Never commit API keys, passwords, or other secrets to GitHub.
-
-### 4. Run the Application
-
-Use the project's Maven wrapper if available:
+### Step 2: Navigate to Project Directory
 
 ```bash
-./mvnw spring-boot:run
+cd smartlms
 ```
+
+### Step 3: Create MySQL Database
+
+```sql
+CREATE DATABASE smartlms_db;
+```
+
+### Step 4: Configure Database
+
+Update your `application.properties` file:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/smartlms_db
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD:your_password}
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+Configure the remaining application settings and environment variables as required.
+
+### Step 5: Build the Project
 
 On Windows:
 
 ```bash
-mvnw.cmd spring-boot:run
+.\mvnw.cmd clean install
 ```
 
-Alternatively, run the application using your IDE.
+On Linux/macOS:
 
-> Make sure Python dependencies and required environment variables are configured before running the application.
+```bash
+./mvnw clean install
+```
 
-## 🚀 Deployment
+### Step 6: Run the Application
 
-The application uses Docker for containerization and Render for cloud deployment.
+```bash
+.\mvnw.cmd spring-boot:run
+```
 
-Deployment requires the appropriate environment variables and external service configurations.
-
-## 📂 Project Structure
+Open your browser and visit:
 
 ```text
-job-intelligence-platform/
-│
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── ... Spring Boot application
-│       └── resources/
-│           └── static/
-│               └── index.html
-│
-├── Python scripts/
-│   ├── extract_skills.py
-│   └── job_fetcher.py
-│
-├── Dockerfile
-├── pom.xml
-└── README.md
+http://localhost:8080
 ```
 
-*Note: The structure above is a simplified overview. Actual folders may differ.*
+## 🔐 User Roles
 
-## 🎯 Project Objectives
+| Role | Access |
+|---|---|
+| ADMIN | Complete platform management |
+| TEACHER | Course, lesson and assignment management |
+| STUDENT | Learning, enrollment and examination |
 
-- Automate resume analysis and skill identification.
-- Reduce manual effort in searching for relevant jobs.
-- Improve job recommendations through skill-based matching.
-- Provide a centralized platform for job discovery and application tracking.
+## 🔮 Future Enhancements
 
-## 🔮 Future Scope
+- Live online classes.
+- Real-time notifications.
+- Advanced analytics dashboard.
+- Online payment integration.
+- Cloud-based file storage.
+- Mobile application.
+- AI-powered learning recommendations.
 
-- Integration with additional job portals.
-- Improved AI-based resume analysis.
-- Advanced career guidance and skill-gap analysis.
-- Interview preparation recommendations.
-- Enhanced job matching algorithms.
+## 🎯 Project Objective
+
+The primary objective of SmartLMS is to develop a structured digital learning environment that simplifies academic management and improves interaction between administrators, teachers, and students.
 
 ## 👨‍💻 Developer
 
 **Niraj Kumar**
 
-GitHub: [@iniraj01](https://github.com/iniraj01)
+- GitHub: [@iniraj01](https://github.com/iniraj01)
+- Portfolio: [nirajpaswan.in](https://www.nirajpaswan.in/)
 
-Project Repository: [Job Intelligence Platform](https://github.com/iniraj01/job-intelligence-platform)
+## 📄 License
+
+This project is developed for educational and learning purposes. Licensing and reuse permissions can be defined as the project evolves.
 
 ---
 
-⭐ If you find this project interesting, consider giving the repository a star!
+⭐ **If you find this project interesting, consider giving it a star!**
