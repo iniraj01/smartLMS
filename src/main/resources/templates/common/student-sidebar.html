@@ -1,0 +1,67 @@
+
+<aside th:fragment="studentSidebar(activePage)"
+       class="sidebar student-sidebar">
+
+    <h5 class="sidebar-heading">Student Panel</h5>
+
+    <ul class="sidebar-menu">
+
+        <li>
+            <a href="/student/dashboard"
+               th:classappend="${activePage == 'dashboard'} ? ' active' : ''">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/available-courses"
+               th:classappend="${activePage == 'courses'} ? ' active' : ''">
+                Available Courses
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/my-courses"
+               th:classappend="${activePage == 'my-courses'} ? ' active' : ''">
+                My Courses
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/assignments"
+               th:classappend="${activePage == 'assignments'} ? ' active' : ''">
+                Assignments
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/exams"
+               th:classappend="${activePage == 'exams'} ? ' active' : ''">
+                Examinations
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/exam-history"
+               th:classappend="${activePage == 'exam-history'} ? ' active' : ''">
+                Exam History
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/certificates"
+               th:classappend="${activePage == 'certificates'} ? ' active' : ''">
+                Certificates
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/profile"
+               th:classappend="${activePage == 'profile'} ? ' active' : ''">
+                My Profile
+            </a>
+        </li>
+
+    </ul>
+
+</aside>

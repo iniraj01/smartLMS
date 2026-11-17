@@ -1,0 +1,88 @@
+
+<nav th:fragment="navbar"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+     class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+
+    <div class="container-fluid">
+
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold" th:href="@{/}">
+            SmartLMS
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <!-- Guest Menu -->
+                <th:block sec:authorize="isAnonymous()">
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/courses}">Courses</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}">Login</a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-light text-primary fw-semibold"
+                           th:href="@{/register}">
+                            Get Started
+                        </a>
+                    </li>
+
+                </th:block>
+
+                <!-- Logged-in User Name -->
+                <li class="nav-item ms-lg-2"
+                    sec:authorize="isAuthenticated()">
+
+                    <span class="nav-link fw-semibold"
+                          th:text="${currentUserName}">
+                        User Name
+                    </span>
+
+                </li>
+
+                <!-- Logout -->
+                <li class="nav-item ms-lg-2"
+                    sec:authorize="isAuthenticated()">
+
+                    <form th:action="@{/logout}" method="post">
+
+                        <input type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}">
+
+                        <button type="submit"
+                                class="btn btn-light btn-sm text-primary fw-semibold">
+                            Logout
+                        </button>
+
+                    </form>
+
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>

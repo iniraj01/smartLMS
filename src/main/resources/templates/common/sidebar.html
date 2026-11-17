@@ -1,0 +1,57 @@
+
+<aside th:fragment="sidebar" class="sidebar">
+
+    <div class="sidebar-heading">
+        <h5>ADMIN PANEL</h5>
+    </div>
+
+    <ul class="sidebar-menu">
+
+        <li>
+            <a href="/admin/dashboard" class="active">
+                <span>🏠</span> Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="/admin/students">
+                <span>👨‍🎓</span> Students
+            </a>
+        </li>
+
+        <li>
+            <a href="/admin/teachers">
+                <span>👨‍🏫</span> Teachers
+            </a>
+        </li>
+
+        <li>
+            <a href="/admin/courses">
+                <span>📚</span> Courses
+            </a>
+        </li>
+
+        <li>
+            <a href="/admin/enrollments">
+                <span>📝</span> Enrollments
+            </a>
+        </li>
+
+        <li>
+            <a href="/admin/reports">
+                <span>📊</span> Reports
+            </a>
+        </li>
+		<a th:href="@{/admin/attendance}">
+		    <i class="bi bi-calendar-check"></i>
+		    Attendance Reports
+		</a>
+        <li>
+            <a href="/admin/settings">
+                <span>⚙️</span> Settings
+            </a>
+        </li>
+
+    </ul>
+
+</aside>

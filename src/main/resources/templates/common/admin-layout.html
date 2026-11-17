@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SmartLMS Admin</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div th:replace="~{common/navbar :: navbar}"></div>
+
+    <!-- Sidebar + Main Content -->
+    <div class="d-flex">
+
+        <!-- Sidebar -->
+        <div th:replace="~{common/sidebar :: sidebar}"></div>
+
+        <!-- Page Content -->
+        <main class="main-content">
+            <h2>Welcome to SmartLMS Admin Panel</h2>
+            <p>Manage your learning platform from here.</p>
+        </main>
+
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{common/footer :: footer}"></div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+</body>
+</html>

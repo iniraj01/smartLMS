@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Assignment | SmartLMS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        .dashboard-wrapper {
+            display: flex;
+            width: 100%;
+            min-height: calc(100vh - 65px);
+        }
+
+        .student-sidebar {
+            flex: 0 0 250px;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            padding: 25px;
+        }
+
+        .upload-box {
+            border: 2px dashed #94a3b8;
+            border-radius: 12px;
+            padding: 35px;
+            text-align: center;
+            background: #f8fafc;
+        }
+
+        @media(max-width: 768px) {
+            .dashboard-wrapper {
+                flex-direction: column;
+            }
+
+            .student-sidebar {
+                width: 100%;
+                flex-basis: auto;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div th:replace="~{common/navbar :: navbar}"></div>
+
+    <div class="dashboard-wrapper">
+
+        <!-- Sidebar -->
+        <aside class="sidebar student-sidebar">
+            <h5 class="sidebar-heading">Student Panel</h5>
+
+            <ul class="sidebar-menu">
+                <li><a href="/student/dashboard">Dashboard</a></li>
+                <li><a href="/student/courses">Browse Courses</a></li>
+                <li><a href="/student/my-courses">My Courses</a></li>
+                <li><a href="/student/assignments" class="active">Assignments</a></li>
+                <li><a href="/student/attendance">Attendance</a></li>
+                <li><a href="/student/progress">My Progress</a></li>
+                <li><a href="/student/certificates">Certificates</a></li>
+                <li><a href="/student/profile">My Profile</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <div class="mb-4">
+                <h2>Submit Assignment</h2>
+                <p class="text-muted">
+                    Upload your completed assignment before the deadline.
+                </p>
+            </div>
+
+            <!-- Assignment Information -->
+            <div class="card shadow-sm border-0 p-4 mb-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Assignment Information</h5>
+                    <span class="badge bg-warning text-dark">Pending</span>
+                </div>
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <small class="text-muted">Assignment Title</small>
+                        <h6 th:text="${assignment.title}">Assignment Title</h6>
+                    </div>
+
+                    <div class="col-md-6">
+                        <small class="text-muted">Course</small>
+                        <h6 th:text="${assignment.course.title}">Course Name</h6>
+                    </div>
+
+                    <div class="col-md-6">
+                        <small class="text-muted">Instructor</small>
+                        <h6 th:text="${assignment.teacher.name}">Instructor Name</h6>
+                    </div>
+
+                    <div class="col-md-6">
+                        <small class="text-muted">Due Date</small>
+                        <h6 class="text-danger"
+                            th:text="${assignment.dueDate}">Due Date</h6>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <h6>Assignment Instructions</h6>
+
+                <p class="text-muted"
+                   th:text="${assignment.description}">
+                    Assignment description
+                </p>
+
+                <p class="mb-0">
+                    <strong>Maximum Marks:</strong>
+                    <span th:text="${assignment.totalMarks}">100</span>
+                </p>
+
+            </div>
+
+            <!-- Submission Form -->
+            <div class="card shadow-sm border-0 p-4">
+
+                <h5 class="mb-4">Upload Your Assignment</h5>
+
+                <form id="submissionForm"
+                      method="post"
+                      enctype="multipart/form-data"
+                      th:action="@{/student/submit-assignment/{id}(id=${assignment.id})}">
+
+                    <!-- CSRF Token -->
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}">
+
+                    <!-- PDF Upload -->
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Upload Assignment PDF
+                        </label>
+
+                        <div class="upload-box">
+
+                            <div class="fs-1 mb-2">📄</div>
+
+                            <h6>Select your assignment PDF</h6>
+
+                            <p class="text-muted small">
+                                Supported format: PDF only (Maximum 5 MB)
+                            </p>
+
+                            <input type="file"
+                                   name="pdfFile"
+                                   id="assignmentFile"
+                                   class="form-control mt-3"
+                                   accept=".pdf,application/pdf">
+
+                            <small id="fileName"
+                                   class="text-success d-block mt-2">
+                            </small>
+
+                        </div>
+                    </div>
+
+                    <!-- Submission Remarks -->
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Submission Remarks
+                        </label>
+
+                        <textarea name="submissionText"
+                                  id="remarks"
+                                  class="form-control"
+                                  rows="4"
+                                  maxlength="5000"
+                                  placeholder="Write any remarks about your submission..."></textarea>
+
+                    </div>
+
+                    <!-- Attachment URL -->
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Attachment URL (Optional)
+                        </label>
+
+                        <input type="url"
+                               name="attachmentUrl"
+                               class="form-control"
+                               placeholder="https://example.com/your-file">
+
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+
+                        <button type="submit" class="btn btn-primary">
+                            Submit Assignment
+                        </button>
+
+                        <a href="/student/assignments"
+                           class="btn btn-outline-secondary">
+                            Cancel
+                        </a>
+
+                    </div>
+
+                    <div id="message" class="mt-3"></div>
+
+                </form>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{common/footer :: footer}"></div>
+
+    <script>
+
+        const fileInput = document.getElementById("assignmentFile");
+        const fileName = document.getElementById("fileName");
+        const form = document.getElementById("submissionForm");
+        const message = document.getElementById("message");
+
+        // Display selected filename and validate PDF
+        fileInput.addEventListener("change", function () {
+
+            message.innerHTML = "";
+            fileName.textContent = "";
+
+            if (this.files.length > 0) {
+
+                const file = this.files[0];
+
+                if (!file.name.toLowerCase().endsWith(".pdf")) {
+                    message.innerHTML =
+                        '<div class="alert alert-danger">Only PDF files are allowed.</div>';
+                    this.value = "";
+                    return;
+                }
+
+                if (file.size > 5 * 1024 * 1024) {
+                    message.innerHTML =
+                        '<div class="alert alert-danger">File size must not exceed 5 MB.</div>';
+                    this.value = "";
+                    return;
+                }
+
+                fileName.textContent = "Selected file: " + file.name;
+            }
+        });
+
+        // Validate before actual backend submission
+        form.addEventListener("submit", function (event) {
+
+            const file = fileInput.files[0];
+            const remarks = document.getElementById("remarks").value.trim();
+            const attachmentUrl =
+                document.querySelector('[name="attachmentUrl"]').value.trim();
+
+            message.innerHTML = "";
+
+            if (!file && !remarks && !attachmentUrl) {
+                event.preventDefault();
+
+                message.innerHTML =
+                    '<div class="alert alert-danger">Please upload a PDF or enter submission remarks or an attachment URL.</div>';
+
+                return;
+            }
+
+            if (file) {
+
+                if (!file.name.toLowerCase().endsWith(".pdf")) {
+                    event.preventDefault();
+                    message.innerHTML =
+                        '<div class="alert alert-danger">Only PDF files are allowed.</div>';
+                    return;
+                }
+
+                if (file.size > 5 * 1024 * 1024) {
+                    event.preventDefault();
+                    message.innerHTML =
+                        '<div class="alert alert-danger">PDF size must not exceed 5 MB.</div>';
+                    return;
+                }
+            }
+
+        });
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

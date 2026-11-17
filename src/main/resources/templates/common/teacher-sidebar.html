@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<aside th:fragment="teacherSidebar(activePage)"
+       class="sidebar teacher-sidebar">
+
+    <h5 class="sidebar-heading">TEACHER PANEL</h5>
+
+    <ul class="sidebar-menu">
+
+        <li>
+            <a href="/teacher/dashboard"
+               th:classappend="${activePage == 'dashboard'} ? ' active' : ''">
+                <span>📊</span> Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="/teacher/courses"
+               th:classappend="${activePage == 'courses'} ? ' active' : ''">
+                <span>📚</span> My Courses
+            </a>
+        </li>
+
+        <li>
+            <a href="/teacher/exams"
+               th:classappend="${activePage == 'exams'} ? ' active' : ''">
+                <span>📝</span> Examinations
+            </a>
+        </li>
+
+        <li>
+            <a href="/teacher/lessons"
+               th:classappend="${activePage == 'lessons'} ? ' active' : ''">
+                <span>📖</span> Manage Lessons
+            </a>
+        </li>
+
+        <li>
+            <a href="/teacher/assignments"
+               th:classappend="${activePage == 'assignments'} ? ' active' : ''">
+                <span>📋</span> Assignments
+            </a>
+        </li>
+
+        <li>
+            <a href="/teacher/submissions"
+               th:classappend="${activePage == 'submissions'} ? ' active' : ''">
+                <span>📥</span> Submissions
+            </a>
+        </li>
+
+        
+
+        <li>
+            <a href="/teacher/profile"
+               th:classappend="${activePage == 'profile'} ? ' active' : ''">
+                <span>👤</span> My Profile
+            </a>
+        </li>
+
+    </ul>
+</aside>
+
+</body>
+</html>

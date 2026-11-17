@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Progress | SmartLMS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        .dashboard-wrapper {
+            display: flex;
+            width: 100%;
+            min-height: calc(100vh - 65px);
+        }
+
+        .student-sidebar {
+            flex: 0 0 250px;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            padding: 25px;
+        }
+
+        .progress-card {
+            border: none;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .progress-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            border-radius: 10px;
+        }
+
+        .performance-circle {
+            width: 145px;
+            height: 145px;
+            border: 12px solid #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+        }
+
+        .performance-circle h2 {
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        @media(max-width: 768px) {
+            .dashboard-wrapper {
+                flex-direction: column;
+            }
+
+            .student-sidebar {
+                width: 100%;
+                flex-basis: auto;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div th:replace="~{common/navbar :: navbar}"></div>
+
+    <div class="dashboard-wrapper">
+
+        <!-- Sidebar -->
+        <aside class="sidebar student-sidebar">
+
+            <h5 class="sidebar-heading">Student Panel</h5>
+
+            <ul class="sidebar-menu">
+                <li><a href="/student/dashboard">Dashboard</a></li>
+                <li><a href="/student/courses">Browse Courses</a></li>
+                <li><a href="/student/my-courses">My Courses</a></li>
+                <li><a href="/student/assignments">Assignments</a></li>
+                <li><a href="/student/attendance">Attendance</a></li>
+                <li><a href="/student/progress" class="active">My Progress</a></li>
+                <li><a href="/student/certificates">Certificates</a></li>
+                <li><a href="/student/profile">My Profile</a></li>
+            </ul>
+
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Heading -->
+            <div class="mb-4">
+                <h2>My Learning Progress</h2>
+                <p class="text-muted">
+                    Track your learning journey and academic performance.
+                </p>
+            </div>
+
+            <!-- Statistics -->
+            <div class="row g-4 mb-4">
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card progress-card shadow-sm p-3">
+                        <h6 class="text-muted">Enrolled Courses</h6>
+                        <h2 class="text-primary">05</h2>
+                        <small>Total courses joined</small>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card progress-card shadow-sm p-3">
+                        <h6 class="text-muted">Completed Courses</h6>
+                        <h2 class="text-success">02</h2>
+                        <small>Courses completed</small>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card progress-card shadow-sm p-3">
+                        <h6 class="text-muted">Lessons Completed</h6>
+                        <h2 class="text-info">42</h2>
+                        <small>Out of 60 lessons</small>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card progress-card shadow-sm p-3">
+                        <h6 class="text-muted">Average Quiz Score</h6>
+                        <h2 class="text-warning">82%</h2>
+                        <small>Across all quizzes</small>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Overall Performance -->
+            <div class="card progress-card shadow-sm p-4 mb-4">
+
+                <div class="row align-items-center">
+
+                    <div class="col-md-5 text-center mb-4 mb-md-0">
+
+                        <h5 class="mb-4">Overall Learning Progress</h5>
+
+                        <div class="performance-circle">
+                            <h2>70%</h2>
+                        </div>
+
+                        <p class="text-primary mt-3 mb-0">
+                            Keep Learning!
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-7">
+
+                        <h5 class="mb-4">Learning Summary</h5>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between">
+                                <strong>Lessons Completed</strong>
+                                <span>42 / 60</span>
+                            </div>
+
+                            <div class="progress mt-2">
+                                <div class="progress-bar bg-primary"
+                                     style="width: 70%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between">
+                                <strong>Assignments Completed</strong>
+                                <span>9 / 12</span>
+                            </div>
+
+                            <div class="progress mt-2">
+                                <div class="progress-bar bg-success"
+                                     style="width: 75%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <strong>Quiz Performance</strong>
+                                <span>82%</span>
+                            </div>
+
+                            <div class="progress mt-2">
+                                <div class="progress-bar bg-warning"
+                                     style="width: 82%">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Course Wise Progress -->
+            <div class="card progress-card shadow-sm p-4 mb-4">
+
+                <h5 class="mb-4">Course-wise Progress</h5>
+
+                <div class="mb-4">
+
+                    <div class="d-flex justify-content-between">
+                        <strong>Java Programming</strong>
+                        <span>90%</span>
+                    </div>
+
+                    <div class="progress mt-2">
+                        <div class="progress-bar bg-primary"
+                             style="width: 90%">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <div class="d-flex justify-content-between">
+                        <strong>Database Management System</strong>
+                        <span>75%</span>
+                    </div>
+
+                    <div class="progress mt-2">
+                        <div class="progress-bar bg-success"
+                             style="width: 75%">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <div class="d-flex justify-content-between">
+                        <strong>Web Development</strong>
+                        <span>60%</span>
+                    </div>
+
+                    <div class="progress mt-2">
+                        <div class="progress-bar bg-warning"
+                             style="width: 60%">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <div class="d-flex justify-content-between">
+                        <strong>Cyber Security</strong>
+                        <span>100%</span>
+                    </div>
+
+                    <div class="progress mt-2">
+                        <div class="progress-bar bg-info"
+                             style="width: 100%">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Recent Quiz Results -->
+            <div class="card progress-card shadow-sm p-4">
+
+                <h5 class="mb-3">Recent Quiz Results</h5>
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Quiz Name</th>
+                                <th>Course</th>
+                                <th>Total Marks</th>
+                                <th>Obtained</th>
+                                <th>Percentage</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Java OOP Quiz</td>
+                                <td>Java Programming</td>
+                                <td>20</td>
+                                <td>18</td>
+                                <td>90%</td>
+                                <td>
+                                    <span class="badge bg-success">Passed</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>SQL Basics Quiz</td>
+                                <td>DBMS</td>
+                                <td>20</td>
+                                <td>16</td>
+                                <td>80%</td>
+                                <td>
+                                    <span class="badge bg-success">Passed</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>HTML Quiz</td>
+                                <td>Web Development</td>
+                                <td>20</td>
+                                <td>12</td>
+                                <td>60%</td>
+                                <td>
+                                    <span class="badge bg-success">Passed</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{common/footer :: footer}"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
